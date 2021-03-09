@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             DesignationSeeder::class,
             UserSeeder::class,
             ExpenseCategorySeeder::class,
+            LaratrustSeeder::class
         ]);
     }
 }

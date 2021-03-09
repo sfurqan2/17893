@@ -16,7 +16,11 @@ class DesignationSeeder extends Seeder
     {
         //
         Designation::insert([
-            'designation_name' => 'Manager',
+            'designation_name' => 'Department Head',
+        ]);
+
+        Designation::insert([
+            'designation_name' => 'Buyer',
         ]);
     }
 }

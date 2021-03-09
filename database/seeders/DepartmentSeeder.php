@@ -20,11 +20,15 @@ class DepartmentSeeder extends Seeder
         ]);
 
         Department::insert([
-            'department_name' => 'Purchase Department'
+            'department_name' => 'Purchases Department'
         ]);
 
         Department::insert([
             'department_name' => 'Inventory Department'
+        ]);
+
+        Department::insert([
+            'department_name' => 'Sales Department'
         ]);
     }
 }
