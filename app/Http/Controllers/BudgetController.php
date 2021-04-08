@@ -45,12 +45,12 @@ class BudgetController extends Controller
         Validator::make($request->all(), [
             'year' => ['required', 'numeric'],
             'budget' => ['required', 'numeric'],
-            'designation' => ['required', 'numeric'], 
+            'designation' => ['required', 'numeric'],
         ])->validate();
 
         $budget = Budget::create([
             'year' => $request->year,
-            'budget_per_month' => $request->budget,
+            'budget_per_month' => $request->budget / 12,
             'designation_id' => $request->designation
         ]);
 

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Budget;
 use App\Models\Expense;
 use Livewire\Component;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ManageExpensesLivewire extends Component
@@ -25,8 +26,9 @@ class ManageExpensesLivewire extends Component
     public function approve(Expense $expense)
     {   
         $user = $expense->user;
-        $budget = Budget::where('year', now()->year)->where('designation_id', $user->designation_id)->value('budget_per_month');
-        $total_expenses = Expense::where('user_id', $user->id)->whereRaw('monthname(`created_at`) = ?', [now()->monthName])->where('status', 'APPROVED')->sum('total_amount');
+        $date = Carbon::parse($expense->date);
+        $budget = Budget::where('year', $date->year)->where('designation_id', $user->designation_id)->value('budget_per_month');
+        $total_expenses = Expense::where('user_id', $user->id)->whereRaw('monthname(`created_at`) = ?', [$date->monthName])->where('status', 'APPROVED')->sum('total_amount');
         if (!isset($budget)){
             session()->flash('bad', 'Budget has not been set!');
             return;
