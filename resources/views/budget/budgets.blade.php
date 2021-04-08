@@ -26,8 +26,8 @@
                                     @foreach($budgets as $budget)
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap text-xs sm:text-sm">{{ $budget['year'] }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-xs sm:text-sm">{{ $budget['budget_per_month'] }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-xs sm:text-sm">{{ $budget['designation']['designation_name'] }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-xs sm:text-sm">{{ $budget['budget_per_month'] }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

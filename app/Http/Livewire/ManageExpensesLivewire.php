@@ -31,7 +31,7 @@ class ManageExpensesLivewire extends Component
             session()->flash('bad', 'Budget has not been set!');
             return;
         } 
-        if ($total_expenses <= $budget) {
+        if ($total_expenses + $expense->total_amount <= $budget) {
             $expense->status = "APPROVED";
             $expense->save();
             unset($this->expenses[$expense->id]);
