@@ -21,6 +21,25 @@
                         {{ __('Expenses') }}
                     </x-jet-nav-link>
                 </div>
+                @permission('expenses-manage')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('manage_expenses') }}" :active="request()->routeIs('manage_expenses')">
+                        {{ __('Manage Expenses') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('expense_history') }}" :active="request()->routeIs('expense_history')">
+                        {{ __('Expense History') }}
+                    </x-jet-nav-link>
+                </div>
+                @endpermission
+                @role('budget_head')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('budgets.index') }}" :active="request()->routeIs('budgets.index')">
+                        {{ __('Budgets') }}
+                    </x-jet-nav-link>
+                </div>
+                @endrole
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

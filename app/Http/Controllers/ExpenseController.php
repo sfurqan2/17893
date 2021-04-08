@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
-use Illuminate\Http\Request;
-use app\Intefaces\ExpenseRepositoryInterface;
-use App\Models\ExpenseCategory;
 use App\Models\ExpenseItem;
+use Illuminate\Http\Request;
+use App\Models\ExpenseCategory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ExpenseController extends Controller
@@ -21,7 +21,7 @@ class ExpenseController extends Controller
     public function index()
     {
         //
-        $expenses = Expense::all();
+        $expenses = Auth::user()->expenses;
         return view('expenses.expenses', compact(['expenses']));
     }
 
@@ -49,17 +49,22 @@ class ExpenseController extends Controller
         Validator::make($request->all(), [
             'date' => ['required', 'date'],
             'expenses' => ['required', 'array', 'min:1'],
-            'expenses.*.*' => ['required', 'numeric'], 
+            'expenses.*.*' => ['required', 'numeric'],
         ])->validate();
 
-        DB::transaction(function() use($request){
-            
+        DB::transaction(function () use ($request) {
+            $totalAmount = 0;
+            foreach ($request->expenses as $expense) {
+                $totalAmount += $expense['amount'];
+            }
+
             $expense_id = Expense::create([
                 'user_id' => auth()->user()->id,
+                'total_amount' => $totalAmount,
                 'date' => $request->date,
             ])->id;
 
-            foreach($request->expenses as $expense){
+            foreach ($request->expenses as $expense) {
                 ExpenseItem::create([
                     'expense_id' => $expense_id,
                     'expense_category_id' => $expense['category'],

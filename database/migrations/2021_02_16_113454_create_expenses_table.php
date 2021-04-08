@@ -16,6 +16,7 @@ class CreateExpensesTable extends Migration
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->unsignedInteger('total_amount');
             $table->date('date');
             $table->enum('status', ['APPROVED', 'DECLINED', 'PENDING'])->default('PENDING');
             $table->timestamps();

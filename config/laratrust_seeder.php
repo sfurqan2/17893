@@ -14,10 +14,14 @@ return [
     'roles_structure' => [
         'department_head' => [
             'users' => 'c,r,u,d',
+            'expenses' => 'm',
         ],
         'buyer' => [
             'profile' => 'r,u',
         ],
+        'budget_head' => [
+            'budgets' => 'c,r,u,d',
+        ]
     ],
 
     'permissions_map' => [
@@ -25,6 +29,6 @@ return [
         'r' => 'read',
         'u' => 'update',
         'd' => 'delete',
-        'm_e' => 'manage-expenses',
+        'm' => 'manage',
     ]
 ];

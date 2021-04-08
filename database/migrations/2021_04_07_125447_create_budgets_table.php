@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChartOfAccountsTable extends Migration
+class CreateBudgetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateChartOfAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('chart_of_accounts', function (Blueprint $table) {
+        Schema::create('budgets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('designation_id')->references('id')->on('designations');
+            $table->unsignedInteger('year');
+            $table->unsignedInteger('budget_per_month');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateChartOfAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chart_of_accounts');
+        Schema::dropIfExists('budgets');
     }
 }
